@@ -10,6 +10,7 @@ public class Die
         sides = 6;
     }
     
+    //constrution 
     public Die(int s)
     {
         sides = s;

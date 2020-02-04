@@ -8,14 +8,22 @@ public class DieDriver
         boolean gameOver = false;
         boolean tie = false;
         int goal = 100;
+        //initialises start locations
         int location1 = 0;
         int location2 = 0;
-        //create players p1 and p2
+        
+        //creates scanner
         Scanner kb = new Scanner(System.in);
+        
+        //initializing how many sides of the dice there are
         System.out.println("how many sides does your die have?");
         int sides = kb.nextInt();
+        
+        //dice rolls for players
         Die p1 = new Die(sides);
         Die p2 = new Die(sides);
+        
+        //Dice rolls for rebuttle
         Die last1 = new Die(sides);
         Die last2 = new Die(sides);
         
@@ -26,19 +34,25 @@ public class DieDriver
         System.out.println("player 1 is at " + location1);
         System.out.println("player 2 is at " + location2);
         pause();
-        //roll for p1
-        //roll for player 1 and check to see if w
+            //roll for p1
             int tempRoll = p1.roll();
+            //roll for p2
             int secondRoll = p2.roll();
+            //roll for p1 rebuttle
             int lastRoll1 = last1.roll();
+             //roll for p2 rebuttle
             int lastRoll2 = last2.roll();
+            
             //if p1 has won set hame over to true
             if(location1 + tempRoll == goal)
             {
                 location1 += tempRoll;
+                //checks to see if p2 can roll to tie the game
                 if(location2 >= (goal - sides))
                 {
+                    //rolled for tie
                     location2 += secondRoll;
+                    //action if the last roll did not reach the goal
                     if (location2 < 100)
                     {
                         System.out.println("Player 1 rolls a " + tempRoll);
@@ -46,10 +60,11 @@ public class DieDriver
                         location1 += tempRoll;
                         gameOver = true;
                     }
+                    //action if the last roll reaches the goal and p2 is now tied with p1
                     else if (location2 == 100)
                     {
                         System.out.println("it's a tie! Roll for rebuttle!");
-                    
+                        
                         if(lastRoll1 == lastRoll2)
                         {
                             System.out.println("Its a TIE!");
@@ -79,11 +94,13 @@ public class DieDriver
                     gameOver = true;
                 }
             }
+            //action when p1 roll if he doesn't win on it
             else if (location1 + tempRoll < goal)
             {
                 System.out.println("Player 1 rolls a " + tempRoll);
                 location1 += tempRoll;
             }
+            // what to do when the roll exceeds the goal
             else
             {
                  System.out.println("Player 1 rolled higher than the goal so the number doesn't count");
@@ -92,6 +109,7 @@ public class DieDriver
             //p2 roll
             if(gameOver == false)
             {
+                //all of p2 rolls and wins
                 if(location2 + secondRoll == goal)
                 {
                 System.out.println("Player 2 rolls a " + secondRoll);
@@ -99,6 +117,7 @@ public class DieDriver
                 location2 += secondRoll;
                 gameOver = true;
                 }
+                 //action if p2 roll if he doesn't win on it
                 else if (location2 + secondRoll < goal)
                 {
                 System.out.println("Player 2 rolls a " + secondRoll);
